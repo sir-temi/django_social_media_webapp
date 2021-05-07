@@ -1,0 +1,8 @@
+<div class="">
+  <h5>
+      {{post.message_html|safe}}
+  </h5>
+  <p><a href="{% url 'posts:otherposts' username=post.user.username %}"><strong>@{{post.user.username}}</strong></a></p>
+  <p>Posted at: {{post.posted_at}} </p>
+  
+</div>

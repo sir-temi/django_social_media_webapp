@@ -1,0 +1,16 @@
+{% extends 'posts/post_base.html' %}
+
+
+{% block body %}
+    
+    {% for post in post_list  %}
+        <div>
+            <p>{% include 'posts/_post.html' %}</p>
+        </div>
+        <div>
+            <p><a href="{% url 'posts:deletepost' pk=post.pk %}"><input type="submit" value="DELETE" class="btn btn-danger"></a></p>
+        </div>
+    {% endfor %}
+        
+{% endblock %}
+    

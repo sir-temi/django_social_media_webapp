@@ -1,0 +1,40 @@
+{% extends 'posts/post_base.html' %}
+
+{% block prepost %}
+    <div class="col-md-4">
+    {% if user.is_authenticated %}
+        <h4>Hi {{user.username}}</h4>
+        <h5 style="color: brown;">You have joined {{groups.count}} group{{groups.count|pluralize}}</h5>
+        <h5 style="color: rgb(101, 165, 42);">You have joined {{user.group_set.count}} group{{groups.count|pluralize}}</h5>
+        </ul>
+        {% if groups %}
+            <h6>Your joined groups</h6>
+            <ol>
+                {% for group in user.group_set.all  %}
+                <li><a href="{% url 'groups:single' slug=group.slug %}">{{group.name}}</a></li>
+                {% endfor %}
+            </ol>
+        {% else %}
+            <h6>You haven't joined any group</h6>
+        {% endif %}
+    {% endif %}
+    </div>
+    <div>
+        <h3>All groups on NaijaSocial</h3>
+        {% for group in other_groups %}
+        <li><a href="{% url 'groups:single' slug=group.slug %}">{{group.name}}</a></li>
+        {% endfor %}
+            
+    </div>
+{% endblock %}
+
+{% block post %}
+    <div>
+    <h3>total posts {{post_list.count}}</h3>
+    {% for post in post_list %}
+        <p><a href="{% url 'posts:single' pk=post.pk username=post.user.username %}">{% include 'posts/_post.html' %}</a></p>
+    {% endfor %}  
+    </div>
+{% endblock post %}
+    
+    

@@ -1,0 +1,16 @@
+{% extends 'posts/post_base.html' %}
+
+
+{% block post %}
+    
+    {% for post in post_list  %}
+        {% include 'posts/_post.html' %}
+        
+        {% if user.is_authenticated and post.user == self.request.user %}
+            <a href="{% url 'posts:deletepost' pk=post.pk %}"><input type="submit" value="DELETE" class="btn btn-danger"></a>
+        {% endif %}
+            
+    {% endfor %}
+        
+{% endblock post %}
+    
